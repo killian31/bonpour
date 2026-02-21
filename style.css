@@ -22,6 +22,8 @@ body {
 
 body {
   overflow: hidden;
+  display: grid;
+  place-items: center;
   font-family: "Montserrat", Arial, sans-serif;
   color: var(--ink);
   background:
@@ -30,11 +32,20 @@ body {
     linear-gradient(140deg, #fff 0%, var(--paper) 44%, var(--sand) 100%);
 }
 
+.voucher-fit {
+  width: 100vw;
+  height: 100svh;
+  padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
 .voucher {
   position: relative;
-  width: min(1100px, calc(100vw - 2.4rem));
-  height: min(700px, calc(100dvh - 2.4rem));
-  margin: 1.5rem auto;
+  width: 1100px;
+  height: 700px;
+  margin: 0;
   border-radius: 30px;
   background: linear-gradient(155deg, var(--teal) 0%, var(--teal-light) 58%, #48b6a4 100%);
   color: var(--white);
@@ -42,6 +53,8 @@ body {
   grid-template-rows: auto 1fr auto;
   overflow: hidden;
   box-shadow: 0 28px 60px rgba(7, 80, 69, 0.35);
+  transform: scale(var(--voucher-scale, 1));
+  transform-origin: center center;
 }
 
 .bg-shape {
@@ -237,135 +250,82 @@ h1 {
 }
 
 @media (max-width: 900px) {
-  .voucher {
-    width: calc(100vw - 0.8rem);
-    height: calc(100dvh - 0.8rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-    margin: 0.4rem auto;
-    border-radius: 18px;
-  }
-
   .voucher__header {
-    padding: 0.65rem 0.75rem 0;
-  }
-
-  .voucher__photo {
-    right: 0.65rem;
-    top: 3rem;
-    width: 95px;
-    border-radius: 14px;
-    border-width: 1px;
-    transform: rotate(3deg);
-  }
-
-  .voucher__icon-stamp {
-    left: -44px;
-    bottom: -64px;
-    width: 150px;
-    opacity: 0.27;
-  }
-
-  .voucher__content {
-    padding: 0.1rem 0.75rem;
-    gap: 0.3rem;
-  }
-
-  .voucher__footer {
-    padding: 0 0.75rem 0.65rem;
-    gap: 0.3rem;
+    padding: 1.1rem 1.25rem 0;
   }
 
   .voucher__logo {
-    width: clamp(120px, 34vw, 180px);
+    width: 190px;
   }
 
   .voucher__tag {
-    font-size: 0.62rem;
-    padding: 0.28rem 0.55rem;
-    border-width: 1px;
+    font-size: 0.72rem;
+    padding: 0.32rem 0.65rem;
+  }
+
+  .voucher__photo {
+    right: 1.1rem;
+    top: 4rem;
+    width: 120px;
+    border-radius: 14px;
+  }
+
+  .voucher__icon-stamp {
+    width: 210px;
+    left: -54px;
+    bottom: -88px;
+  }
+
+  .voucher__content {
+    padding: 0.25rem 1.2rem;
+    gap: 0.35rem;
   }
 
   h1 {
-    font-size: clamp(1.7rem, 8vw, 2.5rem);
+    font-size: clamp(2rem, 8.6vw, 3.1rem);
   }
 
   .subtitle {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .info-grid {
     grid-template-columns: 1fr;
-    margin-top: 0.45rem;
-    gap: 0.4rem;
+    margin-top: 0.6rem;
+    gap: 0.42rem;
   }
 
   .info-card {
-    padding: 0.45rem 0.55rem;
+    padding: 0.5rem 0.62rem;
     border-radius: 12px;
   }
 
   .info-card h2 {
-    font-size: 0.64rem;
-    margin-bottom: 0.15rem;
+    font-size: 0.7rem;
+    margin-bottom: 0.16rem;
   }
 
   .info-card p {
-    font-size: 0.73rem;
-    line-height: 1.25;
-  }
-
-  .voucher__footer p {
-    font-size: 0.72rem;
-    line-height: 1.25;
-  }
-
-  .surtitle {
-    font-size: 0.55rem;
-    letter-spacing: 0.14em;
-  }
-
-  .voucher__link {
     font-size: 0.76rem;
+    line-height: 1.24;
   }
 
-  .voucher__links {
-    gap: 0.6rem;
-  }
-}
-
-@media (max-width: 900px) and (max-height: 820px) {
-  .voucher__content {
-    gap: 0.2rem;
-  }
-
-  h1 {
-    font-size: clamp(1.45rem, 6.4vw, 2rem);
-    line-height: 0.92;
-  }
-
-  .subtitle {
-    font-size: 0.86rem;
-  }
-
-  .info-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .voucher__footer {
+    padding: 0 1.2rem 1rem;
     gap: 0.34rem;
   }
 
-  .info-card {
-    padding: 0.38rem 0.45rem;
-  }
-
-  .info-card h2 {
-    font-size: 0.59rem;
-  }
-
-  .info-card p {
-    font-size: 0.68rem;
-    line-height: 1.2;
-  }
-
   .voucher__footer p {
-    font-size: 0.66rem;
+    font-size: 0.75rem;
+    line-height: 1.25;
+  }
+
+  .voucher__link {
+    font-size: 0.77rem;
+  }
+
+  .voucher__links {
+    gap: 0.62rem;
   }
 }
 
