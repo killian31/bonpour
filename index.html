@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Montserrat:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css?v=20260221e" />
+    <link rel="stylesheet" href="style.css?v=20260221f" />
   </head>
   <body>
     <div class="voucher-fit">
@@ -88,11 +88,9 @@
           const baseWidth  = portrait ? 390  : 1100;
           const baseHeight = portrait ? 700  : 700;
 
-          const style = window.getComputedStyle(fit);
-          const padX = parseFloat(style.paddingLeft)  + parseFloat(style.paddingRight);
-          const padY = parseFloat(style.paddingTop)   + parseFloat(style.paddingBottom);
-          const availW = Math.max(0, vw - padX);
-          const availH = Math.max(0, vh - padY);
+          const margin = 8;
+          const availW = Math.max(0, vw - margin * 2);
+          const availH = Math.max(0, vh - margin * 2);
           const scale  = Math.min(availW / baseWidth, availH / baseHeight);
           voucher.style.setProperty("--voucher-scale", Math.max(0.1, scale).toFixed(4));
         }
