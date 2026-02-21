@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Montserrat:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css?v=20260221c" />
+    <link rel="stylesheet" href="style.css?v=20260221e" />
   </head>
   <body>
     <div class="voucher-fit">
@@ -85,8 +85,8 @@
           voucher.classList.toggle("voucher--portrait", portrait);
           voucher.classList.toggle("voucher--landscape", !portrait);
 
-          const baseWidth  = portrait ? 430  : 1100;
-          const baseHeight = portrait ? 760  : 700;
+          const baseWidth  = portrait ? 390  : 1100;
+          const baseHeight = portrait ? 700  : 700;
 
           const style = window.getComputedStyle(fit);
           const padX = parseFloat(style.paddingLeft)  + parseFloat(style.paddingRight);
