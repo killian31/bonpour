@@ -33,7 +33,7 @@ body {
 .voucher {
   position: relative;
   width: min(1100px, calc(100vw - 2.4rem));
-  height: min(700px, calc(100vh - 2.4rem));
+  height: min(700px, calc(100dvh - 2.4rem));
   margin: 1.5rem auto;
   border-radius: 30px;
   background: linear-gradient(155deg, var(--teal) 0%, var(--teal-light) 58%, #48b6a4 100%);
@@ -239,7 +239,7 @@ h1 {
 @media (max-width: 900px) {
   .voucher {
     width: calc(100vw - 0.8rem);
-    height: calc(100vh - 0.8rem);
+    height: calc(100dvh - 0.8rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
     margin: 0.4rem auto;
     border-radius: 18px;
   }
@@ -329,6 +329,43 @@ h1 {
 
   .voucher__links {
     gap: 0.6rem;
+  }
+}
+
+@media (max-width: 900px) and (max-height: 820px) {
+  .voucher__content {
+    gap: 0.2rem;
+  }
+
+  h1 {
+    font-size: clamp(1.45rem, 6.4vw, 2rem);
+    line-height: 0.92;
+  }
+
+  .subtitle {
+    font-size: 0.86rem;
+  }
+
+  .info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.34rem;
+  }
+
+  .info-card {
+    padding: 0.38rem 0.45rem;
+  }
+
+  .info-card h2 {
+    font-size: 0.59rem;
+  }
+
+  .info-card p {
+    font-size: 0.68rem;
+    line-height: 1.2;
+  }
+
+  .voucher__footer p {
+    font-size: 0.66rem;
   }
 }
 
