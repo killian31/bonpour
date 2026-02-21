@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Montserrat:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css?v=20260221b" />
+    <link rel="stylesheet" href="style.css?v=20260221c" />
   </head>
   <body>
     <div class="voucher-fit">
@@ -76,28 +76,35 @@
         const voucher = document.querySelector(".voucher");
         if (!fit || !voucher) return;
 
-        const baseWidth = 1100;
-        const baseHeight = 700;
-
         function updateFitScale() {
+          const vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+          const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+
+          // Choose layout based on screen orientation
+          const portrait = vh > vw;
+          voucher.classList.toggle("voucher--portrait", portrait);
+          voucher.classList.toggle("voucher--landscape", !portrait);
+
+          const baseWidth  = portrait ? 430  : 1100;
+          const baseHeight = portrait ? 760  : 700;
+
           const style = window.getComputedStyle(fit);
-          const padX = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
-          const padY = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
-          const viewportWidth = window.visualViewport ? window.visualViewport.width : window.innerWidth;
-          const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-          const availableWidth = Math.max(0, viewportWidth - padX);
-          const availableHeight = Math.max(0, viewportHeight - padY);
-          const scale = Math.min(availableWidth / baseWidth, availableHeight / baseHeight);
+          const padX = parseFloat(style.paddingLeft)  + parseFloat(style.paddingRight);
+          const padY = parseFloat(style.paddingTop)   + parseFloat(style.paddingBottom);
+          const availW = Math.max(0, vw - padX);
+          const availH = Math.max(0, vh - padY);
+          const scale  = Math.min(availW / baseWidth, availH / baseHeight);
           voucher.style.setProperty("--voucher-scale", Math.max(0.1, scale).toFixed(4));
         }
 
         window.addEventListener("resize", updateFitScale, { passive: true });
-        window.addEventListener("orientationchange", updateFitScale, { passive: true });
+        window.addEventListener("orientationchange", function () {
+          // Give the browser a moment to settle the new dimensions
+          setTimeout(updateFitScale, 80);
+        }, { passive: true });
         if (window.visualViewport) {
           window.visualViewport.addEventListener("resize", updateFitScale, { passive: true });
-          window.visualViewport.addEventListener("scroll", updateFitScale, { passive: true });
         }
-        setTimeout(updateFitScale, 120);
         updateFitScale();
       })();
     </script>
